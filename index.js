@@ -5,13 +5,36 @@ const pc = newPlayableCharacter(100, 110)
 const npc = newNonPlayableCharacter(50, 300)
 
 // have the NPC start walking east immediately
-npc.walkEast()
+
+async function moveNPC(){
+    await npc.walkNorth(1400)
+    await npc.walkEast(1200)
+    await npc.walkSouth(300)
+    await npc.walkEast(1500)
+    await npc.walkSouth(1500)
+    await npc.walkWest(2700)
+    await npc.walkNorth(400)
+}
+
+moveNPC()
 
 // Create the inventory
 const inventory = newInventory()
 move(inventory).to(0, 0)
 
+function bgImages(url, width, height) {
+ let bg = document.createElement("div");
+ bg.style.backgroundImage = `url(${url})`;
+ bg.style.width = width + "%";
+ bg.style.height = height + "rem";
+ document.body.style.margin = "0";
+ document.body.appendChild(bg);
+ return bg;
+}
+
 // Create everything else
+bgImages("assets/sky.png", 100, 25);
+bgImages("assets/grass.png", 100, 62.8);
 move(newImage('assets/tree.png')).to(200, 450)
 move(newImage('assets/pillar.png')).to(350, 250)
 move(newImage('assets/pine-tree.png')).to(450, 350)
